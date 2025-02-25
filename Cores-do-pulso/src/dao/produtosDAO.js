@@ -1,5 +1,4 @@
-class ProductsDAO {
-    // READ - Obter todos os produtos
+class ProdutosDAO {
     static async getProducts(client, filter = {}) {
         try {
             const cursor = await client.find(filter).project({_id: 0}).sort({ nome: 1 });
@@ -9,7 +8,6 @@ class ProductsDAO {
         }
     }
 
-    // CREATE - Adicionar um novo produto
     static async insertProduct(client, product) {
         try {
             return await client.insertOne(product);
@@ -18,7 +16,6 @@ class ProductsDAO {
         }
     }
 
-    // DELETE - Remover um produto pelo nome
     static async deleteProductByName(client, nome) {
         try {
             return await client.deleteOne({ nome });
@@ -27,7 +24,6 @@ class ProductsDAO {
         }
     }
 
-    // UPDATE - Atualizar preço do produto pelo nome
     static async updateProductPriceByName(client, nome, newPrice) {
         try {
             return await client.updateOne({ nome }, { $set: { preco: newPrice } });
@@ -36,7 +32,6 @@ class ProductsDAO {
         }
     }
 
-    // READ - Obter produtos com desconto
     static async getDiscountedProducts(client) {
         try {
             return await client.find({ desconto: { $exists: true, $gt: 0 } }).toArray();
@@ -45,7 +40,6 @@ class ProductsDAO {
         }
     }
 
-    // READ - Obter produtos por cor
     static async getProductsByColor(client, color) {
         try {
             return await client.find({ cor: color }).toArray();
@@ -55,4 +49,4 @@ class ProductsDAO {
     }
 }
 
-module.exports = ProductsDAO;
+module.exports = ProdutosDAO;

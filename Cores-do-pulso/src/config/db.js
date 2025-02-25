@@ -1,16 +1,13 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
-const client = new MongoClient(process.env.URI);
+const mongoURI = process.env.MONGO_URI;
 
-async function connectDB() {
-    try {
-        await client.connect();
-        console.log('✅ Conectado ao banco de dados MongoDB');
-        return client.db('cores_do_pulso').collection('produtos');
-    } catch (err) {
-        console.error('❌ Erro ao conectar ao banco de dados:', err);
-    }
-}
+mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => console.log("✅ Conectado ao MongoDB"))
+    .catch(err => console.error("❌ Erro ao conectar ao MongoDB:", err));
 
-module.exports = connectDB;
+module.exports = mongoose;
