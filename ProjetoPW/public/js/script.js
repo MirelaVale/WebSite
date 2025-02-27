@@ -10,6 +10,12 @@ function mostrarContato() {
     alert("Contato: contato@coresdopulso.com");
 }
 
+function sobreNos() {
+    window.location.href = 'https://www.instagram.com/mirelamoreirav/?next=%2F';
+}
+    
+
+
 function mostrarCarrinho() {
     alert("Você tem " + contadorCarrinho + " itens no carrinho.");
 }
